@@ -14,6 +14,15 @@ const { title = "Tailspin Toys" } = Astro.props;
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
+        <script is:inline>
+            try {
+                if (localStorage.getItem('tailspin-high-contrast') === 'true') {
+                    document.documentElement.classList.add('high-contrast');
+                }
+            } catch {
+                // Ignore unavailable storage so the page remains usable.
+            }
+        </script>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
@@ -45,5 +54,59 @@ const { title = "Tailspin Toys" } = Astro.props;
     body {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+    }
+
+    html.high-contrast {
+        color-scheme: dark;
+    }
+
+    html.high-contrast body {
+        background-color: #000 !important;
+        color: #fff !important;
+    }
+
+    html.high-contrast header {
+        background-color: #000 !important;
+        border-bottom: 2px solid #fff;
+    }
+
+    html.high-contrast a,
+    html.high-contrast button,
+    html.high-contrast label,
+    html.high-contrast legend,
+    html.high-contrast select,
+    html.high-contrast option,
+    html.high-contrast h1,
+    html.high-contrast h2,
+    html.high-contrast h3,
+    html.high-contrast p,
+    html.high-contrast span {
+        color: #fff !important;
+    }
+
+    html.high-contrast a,
+    html.high-contrast button,
+    html.high-contrast input,
+    html.high-contrast select,
+    html.high-contrast textarea,
+    html.high-contrast [data-testid='game-card'],
+    html.high-contrast [data-testid='game-filters'],
+    html.high-contrast [data-testid='empty-state'] {
+        border-color: #fff !important;
+    }
+
+    html.high-contrast a:focus-visible,
+    html.high-contrast button:focus-visible,
+    html.high-contrast input:focus-visible,
+    html.high-contrast select:focus-visible {
+        outline: 3px solid #ff0;
+        outline-offset: 3px;
+    }
+
+    html.high-contrast [data-testid='game-card'],
+    html.high-contrast [data-testid='game-filters'],
+    html.high-contrast [data-testid='empty-state'],
+    html.high-contrast nav {
+        background-color: #111 !important;
     }
 </style>
